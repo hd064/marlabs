@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+<script>
+$("document").ready(function(){
+	$("button").click(function(){
+		$("button").fadeOut();
+		$('.submit').append('<input type="submit">');
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "test.php",
+			success: function(data) {
+				var question=data;
+				console.log(question[3].question);
+				for (var i=0;i<10;i++) {
+					var str=i+1;
+					$('#'+str).append("<p>"+question[i].question+"</p>");
+					$('#'+str).append('<input type="checkbox" name="option'+str+'[]" value="a">'+question[i].a+"<br>");
+					$('#'+str).append('<input type="checkbox" name="option'+str+'[]" value="b">'+question[i].b+"<br>");
+					$('#'+str).append('<input type="checkbox" name="option'+str+'[]" value="c">'+question[i].c+"<br>");
+					$('#'+str).append('<input type="checkbox" name="option'+str+'[]" value="d">'+question[i].d+"<br>");					
+				}
+			}			
+		});
+	});
+});
+
+
+</script>
+
+<button>Click to start the quiz</button><br><br>
+<div class="row">
+	<form action="answer.php" method="post">
+	<div class="col-md-12" id="1"></div>
+  	<div class="col-md-12" id="2"></div>
+  	<div class="col-md-12" id="3"></div>
+  	<div class="col-md-12" id="4"></div>
+	<div class="col-md-12" id="5"></div>
+	<div class="col-md-12" id="6"></div>
+	<div class="col-md-12" id="7"></div>
+	<div class="col-md-12" id="8"></div>
+	<div class="col-md-12" id="9"></div>
+	<div class="col-md-12" id="10"></div>
+	<div class="submit"></div>
+	</form>
+</div>
+
+</body>
+</html>
